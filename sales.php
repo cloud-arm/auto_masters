@@ -186,7 +186,7 @@ include_once("sidebar.php");
 		for($i=0; $row = $result->fetch(); $i++){
 			$pro_id=$row['product_id'];
 
-$resultz = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' ");
+$resultz = $db->prepare("SELECT * FROM product WHERE product_id = '$pro_id' AND type = 'Product' ");
 $resultz->bindParam(':userid', $res);
 $resultz->execute();
 for($i=0; $rowz = $resultz->fetch(); $i++){
