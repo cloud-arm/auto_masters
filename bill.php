@@ -7,9 +7,20 @@
 	$invo = $_GET['id'];
 	$co = substr($invo,0,2) ;
 			?>
+
+<?php $invo=$_GET['id'];
+	$result = $db->prepare("SELECT * FROM sales WHERE   invoice_number='$invo'");
+	$result->bindParam(':userid', $date);
+    $result->execute();
+    for($i=0; $row = $result->fetch(); $i++){ 
+		$name=$row['customer_name'];
+		$phone="";
+		$vehicle_no=$row['vehicle_no'];
+	 } 
+	?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>CLOUD ARM | Invoice</title>
+  <title><?php echo $vehicle_no ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -34,15 +45,7 @@ $sec = "1";
   <!-- Main content -->
   <section class="invoice">
 	  
-	<?php $invo=$_GET['id'];
-	$result = $db->prepare("SELECT * FROM sales WHERE   invoice_number='$invo'");
-	$result->bindParam(':userid', $date);
-    $result->execute();
-    for($i=0; $row = $result->fetch(); $i++){ 
-		$name=$row['customer_name'];
-		$phone="";
-	 } 
-	?>
+	
 	  
 	  
 	  <div class="row">

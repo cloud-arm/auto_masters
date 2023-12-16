@@ -135,6 +135,16 @@ To:<input type="text" style="width:223px; padding:4px;" name="d2" id="datepicker
                   <td><?php echo $row['amount']-$row['labor_cost'];?></td>
                   <td><?php echo $row['amount'];?></td>
 				  <td>
+				   <?php $cus_id=$row['customer_id']; 
+				   $cus_rs = $db->prepare("SELECT * FROM customer WHERE  id = '$cus_id' ");
+				   $cus_rs->bindParam(':id', $res);
+				   $cus_rs->execute();
+				   for($i=0; $row2 = $cus_rs->fetch(); $i++){ $contact=$row2['contact']; } 
+				   $contact= preg_replace('/[^a-zA-Z0-9]/', '', $contact);  
+				   $phone_no=substr($contact, -9);
+				   ?>
+				   <a target="_blank" aria-label="Chat on WhatsApp" href="https://wa.me/+94<?php echo $phone_no ?>?text=This is your Invoice"> <img width="17%" alt="Chat on WhatsApp" src="WhatsAppButtonGreenLarge.svg" />
+				    </a>
 					<a href="bill.php?id=<?php echo $id;?>" class="btn btn-primary btn-xs"><b>Print</b></a>
 				  <a href="bill_remove.php?id=<?php echo $row['transaction_id'];?>&d1=<?php echo $d1; ?>&d2=<?php echo $d2; ?>" class="btn btn-danger btn-xs dll" style="display: none; width:60%;"><b>Delete</b></a>
 				</td>
